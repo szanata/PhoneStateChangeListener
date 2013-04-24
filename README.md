@@ -16,9 +16,9 @@ Possible states are IDLE, OFFHOOK and RINGING
     
 3 - Possible values to 'state' variable are:
 
-    plugins.PhoneStateChangeListener.IDLE // when the none call are being made
+    plugins.PhoneStateChangeListener.IDLE // when no call is being made
     plugins.PhoneStateChangeListener.RINGING // when the phone is ringing
-    plugins.PhoneStateChangeListener.OFFHOOK // when the phone is busy
+    plugins.PhoneStateChangeListener.OFFHOOK // when the phone is during a call conversation
     plugins.PhoneStateChangeListener.NONE // when something goes wrong
     
 4 - To stop listening to this:
