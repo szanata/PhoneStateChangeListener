@@ -1,14 +1,14 @@
 /**
- * 	PhoneListener.java
- * 	PhoneListener PhoneGap plugin (Android)
+ *  PhoneStateChangeListener cordova plugin (Android)
  * 
  * 	@author Stéfano Stypulkows Zanata
- * 	@see http://szanata.com 
- * 	@licence MIT <http://szanata.com/MIT.txt>
- * 	@licence GNU <http://szanata.com/GNU.txt>
- * 	Based upon PhoneListener by authored by Tommy-Carlos Williams <https://github.com/devgeeks> and updated by Matt McGrath
+ * 	@see http://szanata.com
+ *  @reference https://github.com/madeinstefano/PhoneStateChangeListener
+ * 	@license MIT <http://szanata.com/MIT.txt>
+ * 	@license GNU <http://szanata.com/GNU.txt>
+ *  
+ * 	Based upon PhoneListener by authored by Tommy-Carlos Williams <https://github.com/devgeeks>
  * 
- *
  */
 package com.szanata.cordova.plugins;
 
@@ -30,7 +30,7 @@ import android.util.Log;
  */
 public class PhoneStateChangeListener extends CordovaPlugin {
 
-	private static final String LOG_TAG = "PhoneListener";
+	private static final String TAG = "PhoneStateChangeListener";
 	private Context context;
 	private CallbackContext callbackContext;
 	private BroadcastReceiver receiver = null;
@@ -93,7 +93,7 @@ public class PhoneStateChangeListener extends CordovaPlugin {
                 this.context.unregisterReceiver(this.receiver);
                 this.receiver = null;
             } catch (final Exception e) {
-                Log.e(LOG_TAG, "Error unregistering phone listener receiver: " + e.getMessage(), e);
+                Log.e(TAG, "Error unregistering phone listener receiver: " + e.getMessage(), e);
             }
         }
     }
