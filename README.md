@@ -1,5 +1,6 @@
 PhoneStateChangeListener
 ========================
+**developed under cordova 2.6 and tested with Android Api level 17**
 
 Cordova plugin to provide callback when Telephony state changes
 
@@ -29,3 +30,4 @@ Possible states are IDLE, OFFHOOK and RINGING
 # version 1
 - Added basic support to listen when Telephony state changes
 - Added feature to remove this listener
+- Full compatibility with cordova 2.6
