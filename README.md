@@ -14,7 +14,7 @@ Possible states are IDLE, OFFHOOK and RINGING
     
 Also register in res/xml/config.xml:
 
-    <plugin name="PhoneListener" value="com.szanata.cordova.plugins.PhoneStateChangeListener"/>
+    <plugin name="PhoneStateChangeListener" value="com.szanata.cordova.plugins.PhoneStateChangeListener"/>
     
 And import the .java to your project
 
