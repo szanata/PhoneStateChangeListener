@@ -38,7 +38,14 @@ And import the .java to your project
     plugins.PhoneStateChangeListener.stop();
     
     
-# version 1
+# changelog
+ 
+### version 1.1
+- Added second parameter to retrieve incoming call number (when state is RINGING)
+- Fixed indentation
+- Added some code optimizations and hardiness
+
+### version 1
 - Added basic support to listen when Telephony state changes
 - Added feature to remove this listener
 - Full compatibility with cordova 2.6
