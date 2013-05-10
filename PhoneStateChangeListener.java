@@ -1,7 +1,7 @@
 /**
  *  PhoneStateChangeListener cordova plugin (Android)
  * 
- * 	@author Stéfano Stypulkows Zanata
+ * 	@author Stéfano Stypulkowski Zanata
  * 	@see http://szanata.com
  *  @reference https://github.com/madeinstefano/PhoneStateChangeListener
  * 	@license MIT <http://szanata.com/MIT.txt>
@@ -16,6 +16,7 @@ import org.apache.cordova.api.CallbackContext;
 import org.apache.cordova.api.CordovaPlugin;
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -31,6 +32,7 @@ import android.util.Log;
 public class PhoneStateChangeListener extends CordovaPlugin {
 
 	private static final String TAG = "PhoneStateChangeListener";
+	private final String NONE = "NONE";
 	private Context context;
 	private CallbackContext callbackContext;
 	private BroadcastReceiver receiver = null;
@@ -69,36 +71,45 @@ public class PhoneStateChangeListener extends CordovaPlugin {
 				@Override
 				public void onReceive(final Context context, final Intent intent) {	
 
-					if(intent != null && intent.getAction().equals(TelephonyManager.ACTION_PHONE_STATE_CHANGED)) {
-						String state = intent.hasExtra(TelephonyManager.EXTRA_STATE) ? intent.getStringExtra(TelephonyManager.EXTRA_STATE) : "NONE";
-			            
-			            if (callbackContext != null){
-			            	callbackContext.success(state);
-			            }
+					if (intent != null && intent.getAction().equals(TelephonyManager.ACTION_PHONE_STATE_CHANGED)) {
+						String state = intent.hasExtra(TelephonyManager.EXTRA_STATE) ? intent.getStringExtra(TelephonyManager.EXTRA_STATE) : NONE;
+						String number = "";
+						
+						if (state.equals(TelephonyManager.EXTRA_STATE_RINGING)){
+							number = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
+						}
+						if (callbackContext != null){
+							final JSONObject data = new JSONObject();
+							try{
+								data.put("state", state);
+								data.put("number", number);
+							}catch(final JSONException e){};
+							callbackContext.success(data);
+						}
 					}
-					
 				}
 			};
+			
 			this.context.registerReceiver(this.receiver, new IntentFilter(TelephonyManager.ACTION_PHONE_STATE_CHANGED));
 		}
 	}
 	
 	
 	/**
-     * removes the Receiver
-     */
-    private void removePhoneListener() {
-        if (this.receiver != null) {
-            try {
-                this.context.unregisterReceiver(this.receiver);
-                this.receiver = null;
-            } catch (final Exception e) {
-                Log.e(TAG, "Error unregistering phone listener receiver: " + e.getMessage(), e);
-            }
-        }
-    }
+	 * removes the Receiver
+	 */
+	private void removePhoneListener() {
+		if (this.receiver != null) {
+			try {
+				this.context.unregisterReceiver(this.receiver);
+				this.receiver = null;
+			} catch (final Exception e) {
+				Log.e(TAG, "Error unregistering phone listener receiver: " + e.getMessage(), e);
+			}
+		}
+	}
 	
-
+	@Override
 	public void onDestroy() {
 		removePhoneListener();
 	}
