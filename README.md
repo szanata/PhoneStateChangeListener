@@ -22,8 +22,9 @@ And import the .java to your project
 
 **2** - Setup the callback to handle when state changes:
     
-    plugins.PhoneStateChangeListener.start(function (state){
+    plugins.PhoneStateChangeListener.start(function (state, number){
       // do stuff with the state
+      // do stuff with the number (when state === RINGING);
     });
     
 **3** - Possible values to 'state' variable are:
