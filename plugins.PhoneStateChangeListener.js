@@ -12,16 +12,16 @@
  */
 window.plugins = window.plugins || {};
 window.plugins.PhoneStateChangeListener = {
-	RINGIGNG: 'RINGING',
-	OFFHOOK: 'OFFHOOK',
-	IDLE: 'IDLE',
-	NONE: 'NONE',
+  RINGIGNG: 'RINGING',
+  OFFHOOK: 'OFFHOOK',
+  IDLE: 'IDLE',
+  NONE: 'NONE',
   start: function(callback) {
-	  cordova.exec(function (data){
-	    callback(data["state"],data["number"]);
+    cordova.exec(function (data){
+      callback(data["state"],data["number"]);
 	  },function (){},'PhoneStateChangeListener','start',[]);
-	},
-	stop: function(callback) {
-		cordova.exec(callback, function (){}, 'PhoneStateChangeListener', 'stop',[]);
-	}
+  },
+  stop: function(callback) {
+    cordova.exec(callback, function (){}, 'PhoneStateChangeListener', 'stop',[]);
+  }
 };
